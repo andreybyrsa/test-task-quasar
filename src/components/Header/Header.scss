@@ -17,4 +17,17 @@
       @include typography(24px, 500, 24px);
     }
   }
+
+  &__tracker {
+    &-task {
+      @include flexible(center, center);
+    }
+
+    &-timer {
+      color: $gray-color-80;
+      font-family: 'Gilroy', sans-serif;
+      @include typography(16px, 500, 18.56px);
+      @include flexible(center, center, $gap: 9px);
+    }
+  }
 }

@@ -1,6 +1,8 @@
 @import "./src/assets/styles/main.scss";
 
 .typography {
+  transform: translateY(1px);
+
   &-text-regular {
     font-family: 'Gilroy', sans-serif;
     @include text-regular;
