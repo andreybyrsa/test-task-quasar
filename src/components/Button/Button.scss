@@ -1,0 +1,61 @@
+@import "src/assets/styles/main.scss";
+
+.button {
+  $parent: &;
+
+  @include flexible(center, center, $gap: 12px);
+
+  // Button Types
+  &-primary {
+    @include button(81px, 40px, $primary-color);
+
+    #{$parent}__text {
+      color: $gray-color-0;
+    }
+  }
+
+  &-secondary {
+    @include button(113px, 40px, transparent);
+
+    #{$parent}__text {
+      color: $primary-color;
+    }
+  }
+
+  // Button States
+  &--primary-hover:hover{
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+    transition: box-shadow .4s ease-out;
+  }
+
+  &--secondary-hover:hover {
+    background-color: $secondary-color;
+    transition: background-color .4s ease-out;
+  }
+
+  &--primary-focus:focus {
+    background-color: $primary-focus-color;
+  }
+
+  &--secondary-focus:focus {
+    background-color: $primary-focus-color;
+
+    #{$parent}__text {
+      color: $gray-color-0;
+    }
+  }
+
+  &--primary-disable {
+    background-color: $gray-color-40;
+
+    #{$parent}__text {
+      color: $gray-color-80;
+    }
+  }
+
+  &--secondary-disable {
+    #{$parent}__text {
+      color: $gray-color-80;
+    }
+  }
+}
