@@ -15,12 +15,14 @@ function Button({
   state,
   onClick,
 }) {
+
   const ButtonClassName = classNames(
     'button',
     `button-${type}`,
     state ? `button--${state}` : '',
     className,
   );
+
   return (
     <button
       className={ButtonClassName}
@@ -29,7 +31,12 @@ function Button({
       disabled={state === 'primary-disable' || 'secondary-disable'}
     >
       {icon ? icon : <></>}
-      <Typography variant={TypographyVariantsTypes.Title_h2_medium} className="button__text">{children}</Typography>
+      <Typography
+        className="button__text"
+        variant={TypographyVariantsTypes.Title_h2_medium}
+      >
+        {children}
+      </Typography>
     </button>
   );
 }

@@ -1,0 +1,10 @@
+@import "src/assets/styles/main.scss";
+
+.checkboxInput {
+  @include button(24px, 24px, $gray-color-0);
+  @include border(solid, $gray-color-60, 8px, 1px);
+
+  &--checked {
+    background-color: $primary-color;
+  }
+}

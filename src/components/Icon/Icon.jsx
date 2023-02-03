@@ -15,12 +15,14 @@ function Icon({
   height,
   color,
 }) {
+
   const [translatePathY, setTranslatePathY] = useState(0);
   const [translatePathX, setTranslatePathX] = useState(0);
   const IconClassName = classNames(
     'icon',
     className,
   );
+
   let customSize = {
     minWidth: `${size}px`,
     minHeight: `${size}px`,
@@ -35,6 +37,7 @@ function Icon({
       maxHeight: `${height}px`,
     }
   }
+
   const translatePathById = useCallback(
     (id) => {
       const currentPath = document.getElementById(id);
@@ -43,6 +46,7 @@ function Icon({
     },
     [viewBox],
   )
+
   useEffect(() => {
     if (iconPath.props.children) {
       iconPath.props.children.forEach((elem) => {
@@ -52,6 +56,7 @@ function Icon({
       translatePathById(iconPath.props.id);
     }
   }, [iconPath.props, translatePathById]);
+
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
