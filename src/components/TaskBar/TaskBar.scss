@@ -1,0 +1,24 @@
+@import "src/assets/styles/main.scss";
+
+.task-bar {
+  height: 100%;
+  width: 100%;
+  padding: 24px 16px 0;
+  background-color: $gray-color-0;
+
+  &__task-name {
+    text-align: start;
+  }
+
+  &__tracker {
+    padding: 24px 0 32px;
+    @include flexible(center, space-between);
+
+
+  }
+
+  &__action-button {
+    @include flexible(center, flex-start, $gap: 12px);
+    @include button(190px, 40px, transparent);
+  }
+}
