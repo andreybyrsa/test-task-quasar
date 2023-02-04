@@ -11,6 +11,7 @@ import './Task.scss';
 function Task({
   className,
   taskName,
+  task,
   trackedTime,
 }) {
 
@@ -20,9 +21,12 @@ function Task({
   );
 
   return (
-    <div className={TaskClassName}>
+    <button
+      type="button"
+      className={TaskClassName}
+    >
       <div className="task__name">
-        <CheckboxInput />
+        <CheckboxInput task={task} />
         <Typography
           className="task__name-text"
           color={colors.gray_100}
@@ -36,19 +40,21 @@ function Task({
       >
         {trackedTime === 0 ? '' : trackedTime}
       </Typography>
-    </div>
+    </button>
   );
 }
 
 Task.defaultProps = {
   className: '',
   taskName: '',
+  state: {},
   trackedTime: 0,
 };
 
 Task.propTypes = {
   className: PropTypes.string,
   taskName: PropTypes.string,
+  state: PropTypes.object,
   trackedTime: PropTypes.number,
 };
 

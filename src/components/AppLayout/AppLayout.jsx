@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React, { useMemo } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import TaskInput from '../Inputs/TaskInput/TaskInput';
@@ -39,7 +39,7 @@ function AppLayout({
       <div className={AppLayoutContentClassName}>
         <TaskInput />
         {todos.map((elem) => (
-          <Task key={elem.id} taskName={elem.todo} trackedTime={elem.trackedTime} />
+          <Task key={elem.id} task={elem} taskName={elem.todo} trackedTime={elem.trackedTime} />
         ))}
       </div>
       <div className={AppLayoutTaskBarClassName}>

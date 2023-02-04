@@ -5,7 +5,6 @@
   width: 100%;
   @include height(40px);
   background-color: $gray-color-0;
-  cursor: pointer;
   @include border($border-radius: 8px);
 
   @include flexible(center, space-between);
@@ -13,6 +12,10 @@
   &:hover {
     background-color: $gray-color-20;
     transition: background-color .4s ease-out;
+  }
+
+  &:focus {
+    background-color: $gray-color-20;
   }
 
   &__name {
