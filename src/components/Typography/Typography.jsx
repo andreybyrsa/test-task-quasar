@@ -39,7 +39,7 @@ function Typography({
 Typography.defaultProps = {
   className: '',
   variant: TypographyVariantsTypes.Text_regular,
-  children: null,
+  children: '',
   color: null,
   style: {},
 };

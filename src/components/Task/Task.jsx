@@ -3,14 +3,16 @@ import classNames from 'classnames';
 import CheckboxInput from '../Inputs/CheckboxInput/CheckboxInput';
 import Typography from '../Typography/Typography';
 import colors from '../../assets/styles/colors';
+import PropTypes from 'prop-types';
+import TypographyVariantsTypes from '../Typography/TypographyVariants.types';
 
 import './Task.scss';
-import PropTypes from "prop-types";
-import TypographyVariantsTypes from "../Typography/TypographyVariants.types";
 
-function Task(
+function Task({
   className,
-) {
+  taskName,
+  trackedTime,
+}) {
 
   const TaskClassName = classNames(
     'task',
@@ -25,15 +27,14 @@ function Task(
           className="task__name-text"
           color={colors.gray_100}
         >
-          Сделать UI-kit
+          {taskName}
         </Typography>
       </div>
-
       <Typography
         variant={TypographyVariantsTypes.Time_regular}
         color={colors.gray_80}
       >
-        03:12:12
+        {trackedTime === 0 ? '' : trackedTime}
       </Typography>
     </div>
   );
@@ -41,10 +42,14 @@ function Task(
 
 Task.defaultProps = {
   className: '',
+  taskName: '',
+  trackedTime: 0,
 };
 
 Task.propTypes = {
   className: PropTypes.string,
+  taskName: PropTypes.string,
+  trackedTime: PropTypes.number,
 };
 
 export default Task;

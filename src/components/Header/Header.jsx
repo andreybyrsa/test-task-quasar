@@ -9,9 +9,9 @@ import colors from '../../assets/styles/colors';
 import './Header.scss';
 import TypographyVariantsTypes from "../Typography/TypographyVariants.types";
 
-function Header(
+function Header({
   className,
-) {
+}) {
 
   const HeaderClassName = classNames(
     'header',

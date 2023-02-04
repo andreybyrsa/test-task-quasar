@@ -10,9 +10,9 @@ import CheckboxInput from '../Inputs/CheckboxInput/CheckboxInput';
 
 import './TaskBar.scss';
 
-function TaskBar(
+function TaskBar({
   className,
-) {
+}) {
 
   const TaskBarClassName = classNames(
     'task-bar',

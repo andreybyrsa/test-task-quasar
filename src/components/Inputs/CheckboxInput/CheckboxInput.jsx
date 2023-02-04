@@ -7,9 +7,9 @@ import PropTypes from 'prop-types';
 
 import './CheckboxInput.scss';
 
-function CheckboxInput(
-  className,
-) {
+function CheckboxInput({
+ className,
+}) {
   const [checked, setChecked] = useState(false);
 
   const CheckboxInputClassName = classNames(

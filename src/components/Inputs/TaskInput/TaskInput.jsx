@@ -7,9 +7,9 @@ import colors from '../../../assets/styles/colors';
 
 import './TaskInput.scss';
 
-function TaskInput(
+function TaskInput({
   className,
-) {
+}) {
 
   const TaskInputClassName = classNames(
     'task-input',
