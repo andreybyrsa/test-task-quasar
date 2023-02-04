@@ -22,7 +22,6 @@ function CheckboxInput({
     checked ? 'checkboxInput--checked' : '',
     className,
   );
-  console.log(task);
 
   const setCheckedState = () => {
     dispatch(setState((task.id - 1)));
@@ -30,10 +29,9 @@ function CheckboxInput({
   }
 
   return (
-    <button
+    <div
       className={CheckboxInputClassName}
       onClick={setCheckedState}
-      type="button"
     >
       {checked &&
         <Icon
@@ -42,7 +40,7 @@ function CheckboxInput({
           color={colors.gray_0}
         />
       }
-    </button>
+    </div>
   )
 }
 
