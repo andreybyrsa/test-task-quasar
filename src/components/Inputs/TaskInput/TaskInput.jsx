@@ -45,7 +45,10 @@ function TaskInput({
         iconPath={IconsPaths.plus}
         color={colors.gray_80}
       />
-      <form onSubmit={submitHandler}>
+      <form
+        style={{ width: '100%', height: '100%' }}
+        onSubmit={submitHandler}
+      >
         <input
           className="task-input__field"
           onChange={changeHandler}
