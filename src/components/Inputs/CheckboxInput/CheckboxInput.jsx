@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
+import Icon from '../../Icon/Icon';
+import IconsPaths from '../../Icon/IconsPaths';
+import colors from '../../../assets/styles/colors';
+import PropTypes from 'prop-types';
 
 import './CheckboxInput.scss';
-import Icon from "../../Icon/Icon";
-import IconsPaths from "../../Icon/IconsPaths";
-import colors from "../../../assets/styles/colors";
 
 function CheckboxInput(
   className,
@@ -37,5 +38,13 @@ function CheckboxInput(
     </button>
   )
 }
+
+CheckboxInput.defaultProps = {
+  className: '',
+};
+
+CheckboxInput.propTypes = {
+  className: PropTypes.string,
+};
 
 export default CheckboxInput;

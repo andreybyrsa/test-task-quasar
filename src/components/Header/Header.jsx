@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 import Icon from '../Icon/Icon';
 import IconsPaths from '../Icon/IconsPaths';
 import Typography from '../Typography/Typography';
@@ -58,5 +59,13 @@ function Header(
     </div>
   );
 }
+
+Header.defaultProps = {
+  className: '',
+};
+
+Header.propTypes = {
+  className: PropTypes.string,
+};
 
 export default Header;

@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 import Typography from '../Typography/Typography';
 import TypographyVariantsTypes from '../Typography/TypographyVariants.types';
 import colors from '../../assets/styles/colors';
@@ -91,5 +92,13 @@ function TaskBar(
     </div>
   );
 }
+
+TaskBar.defaultProps = {
+  className: '',
+};
+
+TaskBar.propTypes = {
+  className: PropTypes.string,
+};
 
 export default TaskBar;
