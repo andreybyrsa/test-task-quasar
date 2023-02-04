@@ -1,0 +1,16 @@
+@import "src/assets/styles/main.scss";
+
+.task-input {
+  width: 100%;
+  @include height(48px);
+  @include flexible(center, flex-start, $gap: 12px);
+
+  &__field {
+    width: 100%;
+    background-color: transparent;
+    outline: none;
+    color: $gray-color-80;
+    font-family: Gilroy, sans-serif;
+    @include typography(16px, 400, 24px);
+  }
+}
