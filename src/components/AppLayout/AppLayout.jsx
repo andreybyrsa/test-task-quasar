@@ -3,14 +3,20 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import TaskInput from '../Inputs/TaskInput/TaskInput';
 import TaskBar from '../TaskBar/TaskBar';
+import Task from '../Task/Task';
+
+import { useSelector } from 'react-redux';
 
 import './AppLayout.scss';
 
-function AppLayout(
-  className,
-  contentClassName,
-  taskBarClassName,
-) {
+function AppLayout({
+ className,
+ contentClassName,
+ taskBarClassName,
+}) {
+
+  const todos = useSelector(state => state.todosStore.todos);
+
   const AppLayoutClassName = classNames(
     'app-layout',
     className,
@@ -32,6 +38,9 @@ function AppLayout(
     <div className={AppLayoutClassName}>
       <div className={AppLayoutContentClassName}>
         <TaskInput />
+        {todos.map((elem) => (
+          <Task key={elem.id} taskName={elem.todo} trackedTime={elem.trackedTime} />
+        ))}
       </div>
       <div className={AppLayoutTaskBarClassName}>
         {taskBar}
