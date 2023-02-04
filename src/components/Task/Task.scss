@@ -1,0 +1,27 @@
+@import "src/assets/styles/main.scss";
+
+.task {
+  padding: 0 8px;
+  width: 100%;
+  @include height(40px);
+  background-color: $gray-color-0;
+  cursor: pointer;
+  @include border($border-radius: 8px);
+
+  @include flexible(center, space-between);
+
+  &:hover {
+    background-color: $gray-color-20;
+    transition: background-color .4s ease-out;
+  }
+
+  &__name {
+    @include flexible(center, center, $gap: 12px);
+
+    &-text {
+      font-family: 'Gilroy', sans-serif;
+      @include typography(16px, 400, 18.56px);
+    }
+  }
+
+}
