@@ -2,11 +2,12 @@
 
 .header {
   width: 100%;
+  @include height(64px);
   background-color: $gray-color-0;
   padding: 0 20px;
+  @include border(solid, $gray-color-40, 0, (0 0 1px 0));
 
   @include flexible(center, space-between);
-  @include height(64px);
 
   &__logo {
     @include flexible(center, center, $gap: 12px);

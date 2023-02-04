@@ -6,6 +6,8 @@
   padding: 24px 16px 0;
   background-color: $gray-color-0;
 
+  @include border(solid, $gray-color-40, 0, (0 0 0 1px));
+
   &__task-name {
     text-align: start;
   }
