@@ -4,6 +4,9 @@ import PropTypes from 'prop-types'
 import TaskInput from '../Inputs/TaskInput/TaskInput'
 import TaskBar from '../TaskBar/TaskBar'
 import Task from '../Task/Task'
+import Typography from '../Typography/Typography'
+import TypographyVariantsTypes from '../Typography/TypographyVariants.types'
+import colors from '../../assets/styles/colors'
 
 import { useSelector } from 'react-redux'
 
@@ -34,6 +37,20 @@ function AppLayout({ className, contentClassName, taskBarClassName }) {
   return (
     <div className={AppLayoutClassName}>
       <div className={AppLayoutContentClassName}>
+        <div className="app-layout__content-placeholders">
+          <Typography
+            variant={TypographyVariantsTypes.Text_regular}
+            color={colors.gray_80}
+          >
+            задача
+          </Typography>
+          <Typography
+            variant={TypographyVariantsTypes.Text_regular}
+            color={colors.gray_80}
+          >
+            время
+          </Typography>
+        </div>
         <TaskInput />
         {todos.map((elem) => (
           <Task
