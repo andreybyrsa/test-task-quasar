@@ -1,23 +1,27 @@
-import React from 'react';
-import classNames from 'classnames';
-import PropTypes from 'prop-types';
-import Typography from '../Typography/Typography';
-import TypographyVariantsTypes from '../Typography/TypographyVariants.types';
-import colors from '../../assets/styles/colors';
-import Icon from '../Icon/Icon';
-import IconsPaths from '../Icon/IconsPaths';
-import CheckboxInput from '../Inputs/CheckboxInput/CheckboxInput';
+import React from 'react'
+import classNames from 'classnames'
+import PropTypes from 'prop-types'
+import Typography from '../Typography/Typography'
+import TypographyVariantsTypes from '../Typography/TypographyVariants.types'
+import CheckboxInput from '../Inputs/CheckboxInput/CheckboxInput'
+import colors from '../../assets/styles/colors'
+import Icon from '../Icon/Icon'
+import IconsPaths from '../Icon/IconsPaths'
 
-import './TaskBar.scss';
+import { removeTodo } from '../../store/reducers/todos/todosSlice'
+import { useDispatch, useSelector } from 'react-redux'
 
-function TaskBar({
-  className,
-}) {
+import './TaskBar.scss'
 
-  const TaskBarClassName = classNames(
-    'task-bar',
-    className,
-  );
+function TaskBar({ className, task }) {
+  const TaskBarClassName = classNames('task-bar', className)
+  const todos = useSelector((state) => state.todosStore.todos)
+  const dispatch = useDispatch()
+
+  const removeCurrentTodo = () => {
+    const currentIndex = todos.findIndex((elem) => elem.id === task.id)
+    dispatch(removeTodo(currentIndex))
+  }
 
   return (
     <div className={TaskBarClassName}>
@@ -26,7 +30,7 @@ function TaskBar({
         color={colors.gray_100}
         variant={TypographyVariantsTypes.Title_h1_medium}
       >
-        Сделать UI-kit
+        {task.todo}
       </Typography>
       <div className="task-bar__tracker">
         <div>
@@ -64,10 +68,8 @@ function TaskBar({
           </Typography>
         </div>
       </div>
-      <button
-        className="task-bar__action-button"
-      >
-        <CheckboxInput />
+      <button className="task-bar__action-button">
+        <CheckboxInput task={task} />
         <Typography
           color={colors.primary}
           variant={TypographyVariantsTypes.Title_h2_medium}
@@ -76,6 +78,7 @@ function TaskBar({
         </Typography>
       </button>
       <button
+        onClick={removeCurrentTodo}
         className="task-bar__action-button"
       >
         <Icon
@@ -90,15 +93,17 @@ function TaskBar({
         </Typography>
       </button>
     </div>
-  );
+  )
 }
 
 TaskBar.defaultProps = {
   className: '',
-};
+  task: {},
+}
 
 TaskBar.propTypes = {
   className: PropTypes.string,
-};
+  task: PropTypes.object,
+}
 
-export default TaskBar;
+export default TaskBar
