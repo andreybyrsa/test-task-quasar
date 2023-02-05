@@ -16,7 +16,18 @@
     padding: 24px 0 32px;
     @include flexible(center, space-between);
 
+    &-button {
+      @include width(40px);
+      @include height(40px);
+      @include flexible(center, center);
 
+      @include border($border-radius: 8px);
+    }
+
+    &-button:active {
+      background-color: $secondary-color;
+      transition: background-color .4s ease-out;
+    }
   }
 
   &__action-button {

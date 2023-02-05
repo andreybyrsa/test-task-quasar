@@ -8,21 +8,28 @@ import colors from '../../assets/styles/colors'
 import Icon from '../Icon/Icon'
 import IconsPaths from '../Icon/IconsPaths'
 
-import { removeTodo, setState } from '../../store/reducers/todos/todosSlice'
+import { removeTodo, setState, setTime } from '../../store/reducers/todos/todosSlice'
 import { useDispatch, useSelector } from 'react-redux'
 
 import './TaskBar.scss'
 
 function TaskBar({ className, task }) {
   const [checked, setChecked] = useState(false)
+  const time = localStorage.getItem(`${task.id}`) ? localStorage.getItem(`${task.id}`) : 0
+  const [currentTime, setCurrentTime] = useState(+time)
+  const [active, setActive] = useState(false)
 
   const TaskBarClassName = classNames('task-bar', className)
   const todos = useSelector((state) => state.todosStore.todos)
   const dispatch = useDispatch()
 
   const removeCurrentTodo = () => {
-    const currentIndex = todos.findIndex((elem) => elem.id === task.id)
-    dispatch(removeTodo(currentIndex))
+    const confirmResult = window.confirm('Вы действительно хотите удалить задачу?')
+    if (confirmResult) {
+      const currentIndex = todos.findIndex((elem) => elem.id === task.id)
+      localStorage.removeItem(`${task.id}`)
+      dispatch(removeTodo(currentIndex))
+    }
   }
 
   useEffect(() => {
@@ -33,6 +40,25 @@ function TaskBar({ className, task }) {
     const currentIndex = todos.findIndex((elem) => elem.id === task.id)
     dispatch(setState(currentIndex))
     setChecked((prevState) => !prevState)
+  }
+
+  useEffect(() => {
+    if (active) {
+      const timeInterval = setInterval(() => {
+        setCurrentTime((prevState) => prevState + 1)
+        localStorage.setItem(`${task.id}`, currentTime.toString())
+        dispatch(setTime(task.id))
+      }, 1000)
+      return () => clearInterval(timeInterval)
+    }
+  }, [active, currentTime, dispatch, task.id])
+
+  const startTimer = () => {
+    setActive(true)
+    setCurrentTime(+time)
+  }
+  const stopTimer = () => {
+    setActive(false)
   }
 
   return (
@@ -57,13 +83,30 @@ function TaskBar({ className, task }) {
             variant={TypographyVariantsTypes.Time_regular}
             color={colors.gray_100}
           >
-            00:20:15
+            {localStorage.getItem(`${task.id}`) ? localStorage.getItem(`${task.id}`) : '00:00:00'}
           </Typography>
         </div>
-        <Icon
-          iconPath={IconsPaths.stop}
-          color={colors.primary}
-        />
+        {active ? (
+          <button
+            onClick={stopTimer}
+            className="task-bar__tracker-button"
+          >
+            <Icon
+              iconPath={IconsPaths.stop}
+              color={colors.primary}
+            />
+          </button>
+        ) : (
+          <button
+            onClick={startTimer}
+            className="task-bar__tracker-button"
+          >
+            <Icon
+              iconPath={IconsPaths.play}
+              color={colors.primary}
+            />
+          </button>
+        )}
         <div>
           <Typography
             style={{ textAlign: 'end' }}

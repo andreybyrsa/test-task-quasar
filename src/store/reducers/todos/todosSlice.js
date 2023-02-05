@@ -15,8 +15,11 @@ const todosSlice = createSlice({
     setState(state, action) {
       state.todos[action.payload].state = !state.todos[action.payload].state
     },
+    setTime(state, action) {
+      state.todos[action.payload - 1].trackedTime = localStorage.getItem(action.payload)
+    },
   },
 })
 
 export default todosSlice.reducer
-export const { addTodo, removeTodo, setState } = todosSlice.actions
+export const { addTodo, removeTodo, setState, setTime } = todosSlice.actions

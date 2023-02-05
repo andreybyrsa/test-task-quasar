@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import './Task.scss'
 
-function Task({ className, onClick, taskName, task, trackedTime }) {
+function Task({ className, onClick, taskName, task }) {
   const TaskClassName = classNames('task', className)
   const [checked, setChecked] = useState(false)
 
@@ -51,7 +51,7 @@ function Task({ className, onClick, taskName, task, trackedTime }) {
         variant={TypographyVariantsTypes.Time_regular}
         color={colors.gray_80}
       >
-        {trackedTime === 0 ? '' : trackedTime}
+        {task.trackedTime}
       </Typography>
     </button>
   )
@@ -62,7 +62,6 @@ Task.defaultProps = {
   onClick: () => null,
   taskName: '',
   task: {},
-  trackedTime: 0,
 }
 
 Task.propTypes = {
@@ -70,7 +69,6 @@ Task.propTypes = {
   onClick: PropTypes.func,
   taskName: PropTypes.string,
   task: PropTypes.object,
-  trackedTime: PropTypes.number,
 }
 
 export default Task

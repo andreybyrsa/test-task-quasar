@@ -31,7 +31,14 @@ function TaskInput({ className }) {
       .map((elem) => elem.id)
       .reduce((maxId, currentId) => (currentId > maxId ? currentId : maxId), 0)
     if (value) {
-      dispatch(addTodo({ id: maxId + 1, todo: value, state: false }))
+      dispatch(
+        addTodo({
+          id: maxId + 1,
+          todo: value,
+          state: false,
+          trackedTime: localStorage.getItem(maxId + 1) ? localStorage.getItem(maxId + 1) : '',
+        }),
+      )
     }
   }
   const changeHandler = (event) => {

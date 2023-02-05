@@ -16,6 +16,10 @@ function AppLayout({ className, contentClassName, taskBarClassName }) {
   const [currentTaskId, setCurrentTaskId] = useState(-1)
   const todos = useSelector((state) => state.todosStore.todos)
 
+  const AppLayoutClassName = classNames('app-layout', className)
+  const AppLayoutContentClassName = classNames('app-layout__content', contentClassName)
+  const AppLayoutTaskBarClassName = classNames('app-layout__task-bar', taskBarClassName)
+
   useEffect(() => {
     if (todos.length === 0) {
       setCurrentTaskId((prevState) => prevState * -1)
@@ -24,10 +28,6 @@ function AppLayout({ className, contentClassName, taskBarClassName }) {
       setCurrentTaskId(todos[todos.length - 1].id - 1)
     }
   }, [todos])
-
-  const AppLayoutClassName = classNames('app-layout', className)
-  const AppLayoutContentClassName = classNames('app-layout__content', contentClassName)
-  const AppLayoutTaskBarClassName = classNames('app-layout__task-bar', taskBarClassName)
 
   const showCurrentTaskBar = (taskId) => {
     const currentIndex = todos.findIndex((elem) => elem.id === taskId)
