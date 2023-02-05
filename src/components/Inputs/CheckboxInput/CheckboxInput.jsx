@@ -1,45 +1,31 @@
-import React, { useState } from 'react';
-import classNames from 'classnames';
-import Icon from '../../Icon/Icon';
-import IconsPaths from '../../Icon/IconsPaths';
-import colors from '../../../assets/styles/colors';
-import PropTypes from 'prop-types';
+import React from 'react'
+import classNames from 'classnames'
+import Icon from '../../Icon/Icon'
+import IconsPaths from '../../Icon/IconsPaths'
+import colors from '../../../assets/styles/colors'
+import PropTypes from 'prop-types'
 
-import { useDispatch } from 'react-redux';
-import { setState } from '../../../store/reducers/todos/todosSlice';
+import './CheckboxInput.scss'
 
-import './CheckboxInput.scss';
-
-function CheckboxInput({
-  className,
-  task,
-}) {
-  const [checked, setChecked] = useState(false);
-  const dispatch = useDispatch();
-
+function CheckboxInput({ className, state, onClick }) {
   const CheckboxInputClassName = classNames(
     'checkboxInput',
-    checked ? 'checkboxInput--checked' : '',
+    state ? 'checkboxInput--checked' : '',
     className,
-  );
-
-  const setCheckedState = () => {
-    dispatch(setState((task.id - 1)));
-    setChecked(prevState => !prevState);
-  }
+  )
 
   return (
     <div
+      onClick={onClick}
       className={CheckboxInputClassName}
-      onClick={setCheckedState}
     >
-      {checked &&
+      {state && (
         <Icon
           viewBox={35}
           iconPath={IconsPaths.done}
           color={colors.gray_0}
         />
-      }
+      )}
     </div>
   )
 }
@@ -47,11 +33,15 @@ function CheckboxInput({
 CheckboxInput.defaultProps = {
   className: '',
   task: {},
-};
+  state: false,
+  onClick: () => null,
+}
 
 CheckboxInput.propTypes = {
   className: PropTypes.string,
   task: PropTypes.object,
-};
+  state: PropTypes.bool,
+  onClick: PropTypes.func,
+}
 
-export default CheckboxInput;
+export default CheckboxInput

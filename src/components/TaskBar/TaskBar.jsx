@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import Typography from '../Typography/Typography'
@@ -8,12 +8,14 @@ import colors from '../../assets/styles/colors'
 import Icon from '../Icon/Icon'
 import IconsPaths from '../Icon/IconsPaths'
 
-import { removeTodo } from '../../store/reducers/todos/todosSlice'
+import { removeTodo, setState } from '../../store/reducers/todos/todosSlice'
 import { useDispatch, useSelector } from 'react-redux'
 
 import './TaskBar.scss'
 
 function TaskBar({ className, task }) {
+  const [checked, setChecked] = useState(false)
+
   const TaskBarClassName = classNames('task-bar', className)
   const todos = useSelector((state) => state.todosStore.todos)
   const dispatch = useDispatch()
@@ -21,6 +23,16 @@ function TaskBar({ className, task }) {
   const removeCurrentTodo = () => {
     const currentIndex = todos.findIndex((elem) => elem.id === task.id)
     dispatch(removeTodo(currentIndex))
+  }
+
+  useEffect(() => {
+    setChecked(task.state)
+  }, [task.state])
+
+  const setCheckedState = () => {
+    const currentIndex = todos.findIndex((elem) => elem.id === task.id)
+    dispatch(setState(currentIndex))
+    setChecked((prevState) => !prevState)
   }
 
   return (
@@ -68,8 +80,14 @@ function TaskBar({ className, task }) {
           </Typography>
         </div>
       </div>
-      <button className="task-bar__action-button">
-        <CheckboxInput task={task} />
+      <button
+        onClick={setCheckedState}
+        className="task-bar__action-button"
+      >
+        <CheckboxInput
+          task={task}
+          state={checked}
+        />
         <Typography
           color={colors.primary}
           variant={TypographyVariantsTypes.Title_h2_medium}

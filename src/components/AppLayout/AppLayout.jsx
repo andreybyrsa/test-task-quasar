@@ -20,9 +20,6 @@ function AppLayout({ className, contentClassName, taskBarClassName }) {
     if (todos.length === 0) {
       setCurrentTaskId((prevState) => prevState * -1)
     }
-    if (todos.length > 0) {
-      setCurrentTaskId(0)
-    }
   }, [todos])
 
   const AppLayoutClassName = classNames('app-layout', className)

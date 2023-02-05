@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import classNames from 'classnames'
 import CheckboxInput from '../Inputs/CheckboxInput/CheckboxInput'
 import Typography from '../Typography/Typography'
@@ -6,10 +6,27 @@ import colors from '../../assets/styles/colors'
 import PropTypes from 'prop-types'
 import TypographyVariantsTypes from '../Typography/TypographyVariants.types'
 
+import { setState } from '../../store/reducers/todos/todosSlice'
+import { useDispatch, useSelector } from 'react-redux'
+
 import './Task.scss'
 
 function Task({ className, onClick, taskName, task, trackedTime }) {
   const TaskClassName = classNames('task', className)
+  const [checked, setChecked] = useState(false)
+
+  const todos = useSelector((state) => state.todosStore.todos)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    setChecked(task.state)
+  }, [task.state])
+
+  const setCheckedState = () => {
+    const currentIndex = todos.findIndex((elem) => elem.id === task.id)
+    dispatch(setState(currentIndex))
+    setChecked((prevState) => !prevState)
+  }
 
   return (
     <button
@@ -18,7 +35,11 @@ function Task({ className, onClick, taskName, task, trackedTime }) {
       className={TaskClassName}
     >
       <div className="task__name">
-        <CheckboxInput task={task} />
+        <CheckboxInput
+          onClick={setCheckedState}
+          state={checked}
+          task={task}
+        />
         <Typography
           className="task__name-text"
           color={colors.gray_100}
