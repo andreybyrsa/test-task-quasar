@@ -20,6 +20,9 @@ function AppLayout({ className, contentClassName, taskBarClassName }) {
     if (todos.length === 0) {
       setCurrentTaskId((prevState) => prevState * -1)
     }
+    if (todos.length > 0 && currentTaskId > todos[todos.length - 1].id - 1) {
+      setCurrentTaskId(todos[todos.length - 1].id - 1)
+    }
   }, [todos])
 
   const AppLayoutClassName = classNames('app-layout', className)
@@ -74,14 +77,12 @@ AppLayout.defaultProps = {
   className: '',
   contentClassName: '',
   taskBarClassName: '',
-  children: null,
 }
 
 AppLayout.propTypes = {
   className: PropTypes.string,
   contentClassName: PropTypes.string,
   taskBarClassName: PropTypes.string,
-  children: PropTypes.array,
 }
 
 export default AppLayout

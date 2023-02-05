@@ -1,43 +1,41 @@
-import React, {useEffect, useState} from 'react';
-import classNames from 'classnames';
-import PropTypes from 'prop-types';
-import Icon from '../../Icon/Icon';
-import IconsPaths from '../../Icon/IconsPaths';
-import colors from '../../../assets/styles/colors';
+import React, { useEffect, useState } from 'react'
+import classNames from 'classnames'
+import PropTypes from 'prop-types'
+import Icon from '../../Icon/Icon'
+import IconsPaths from '../../Icon/IconsPaths'
+import colors from '../../../assets/styles/colors'
 
-import { useDispatch, useSelector } from 'react-redux';
-import { addTodo } from '../../../store/reducers/todos/todosSlice';
+import { useDispatch, useSelector } from 'react-redux'
+import { addTodo } from '../../../store/reducers/todos/todosSlice'
 
-import './TaskInput.scss';
+import './TaskInput.scss'
 
-function TaskInput({
-  className,
-}) {
-  const [value, setValue] = useState('');
-  const todos = useSelector(state => state.todosStore.todos);
-  const dispatch = useDispatch();
+function TaskInput({ className }) {
+  const [value, setValue] = useState('')
+  const todos = useSelector((state) => state.todosStore.todos)
+  const dispatch = useDispatch()
 
-  const TaskInputClassName = classNames(
-    'task-input',
-    className,
-  );
+  const TaskInputClassName = classNames('task-input', className)
 
   useEffect(() => {
     if (todos.length < 1) {
-      setValue('');
+      setValue('')
     } else {
-      setValue(todos[todos.length - 1].todo);
+      setValue(todos[todos.length - 1].todo)
     }
-  }, [todos]);
+  }, [todos])
 
   const submitHandler = (event) => {
-    event.preventDefault();
+    event.preventDefault()
+    const maxId = todos
+      .map((elem) => elem.id)
+      .reduce((maxId, currentId) => (currentId > maxId ? currentId : maxId), 0)
     if (value) {
-      dispatch(addTodo({id: todos.length + 1, todo: value, state: false}));
+      dispatch(addTodo({ id: maxId + 1, todo: value, state: false }))
     }
   }
   const changeHandler = (event) => {
-    setValue(event.target.value);
+    setValue(event.target.value)
   }
   return (
     <div className={TaskInputClassName}>
@@ -58,15 +56,15 @@ function TaskInput({
         />
       </form>
     </div>
-  );
+  )
 }
 
 TaskInput.defaultProps = {
   className: '',
-};
+}
 
 TaskInput.propTypes = {
   className: PropTypes.string,
-};
+}
 
-export default TaskInput;
+export default TaskInput

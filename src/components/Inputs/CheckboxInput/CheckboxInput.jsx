@@ -32,14 +32,12 @@ function CheckboxInput({ className, state, onClick }) {
 
 CheckboxInput.defaultProps = {
   className: '',
-  task: {},
   state: false,
   onClick: () => null,
 }
 
 CheckboxInput.propTypes = {
   className: PropTypes.string,
-  task: PropTypes.object,
   state: PropTypes.bool,
   onClick: PropTypes.func,
 }
